@@ -3,7 +3,7 @@
 #include <vector>
 #include <iterator>
 #include <cmath>
-#include "Main.h"
+#include "My_List.h"
 using namespace std;
 
 template<class Binary = plus<>>
@@ -171,76 +171,100 @@ enum Menu
 	Plus,
 	Minus,
 };
-int main()
-{
-	system("chcp 1251");
-	vector<list<int>> k;
-	list<int> l;
-	list <int> ::iterator it;
-	list <int> ::reverse_iterator itt;
-	while (true) 
+
+
+int main() {
+	My_List<int> l;
+	l.push_back(2);
+	l.push_back(2);
+	l.clear();
+	l.push_front(90);
+	//l.push_back(3);
+	//l.pop_back();
+	l.push_front(12);
+	l.pop_front();
+	cout << l.size() << endl;
+	//cout << l[1] << endl;
+	//list <int> ::iterator it;
+	/*for (auto &f : l)
 	{
-		cout << "1. Добавить многочлен" << endl;
-		cout << "2. Вывести многочлен" << endl;
-		cout << "3. Умножить многочлен на число" << endl;
-		cout << "4. Найти корни квадратного уравнения" << endl;
-		cout << "5. Добавить два полинома" << endl;
-		cout << "6. Отнять два полинома" << endl;
-		cout << "0. Выход из программы" << endl;
-		int menu;
-		cin >> menu;
-		system("cls");
-		switch (menu)
-		{
-		case Add_polinom:
-		{
-			Polinom(l, k);
-			system("cls");
-			break;
-		}
-		case Output:
-		{
-			Viviod(k);
-			system("pause");
-			system("cls");
-			break;
-		}
-		case Multiply:
-		{
-			Umnozhit(it, k);
-			system("cls");
-			break;
-		}
-		case Find_korni:
-		{
-			Korni(k);
-			system("pause");
-			system("cls");
-			break;
-		}
-		case Plus:
-		{
-			Arithmetic(k, l);
-			system("cls");
-			break;
-		}
-		case Minus:
-		{
-			Arithmetic(k, l, minus<>());
-			system("cls");
-			break;
-		}
-		case Exit:
-		{
-			return 0;
-		}
-		default:
-		{
-			cout << "Введите 1, 2, 3, 4, 5, 6 или 0" << endl;
-			system("pause");
-			system("cls");
-			break;
-		}
-		}
-	}
+		cout << f << " ";
+	}*/
+	system("pause");
+	return 0;
 }
+
+//
+//int main()
+//{
+//	system("chcp 1251");
+//	vector<list<int>> k;
+//	list<int> l;
+//	list <int> ::iterator it;
+//	list <int> ::reverse_iterator itt;
+//	while (true) 
+//	{
+//		cout << "1. Добавить многочлен" << endl;
+//		cout << "2. Вывести многочлен" << endl;
+//		cout << "3. Умножить многочлен на число" << endl;
+//		cout << "4. Найти корни квадратного уравнения" << endl;
+//		cout << "5. Добавить два полинома" << endl;
+//		cout << "6. Отнять два полинома" << endl;
+//		cout << "0. Выход из программы" << endl;
+//		int menu;
+//		cin >> menu;
+//		system("cls");
+//		switch (menu)
+//		{
+//		case Add_polinom:
+//		{
+//			Polinom(l, k);
+//			system("cls");
+//			break;
+//		}
+//		case Output:
+//		{
+//			Viviod(k);
+//			system("pause");
+//			system("cls");
+//			break;
+//		}
+//		case Multiply:
+//		{
+//			Umnozhit(it, k);
+//			system("cls");
+//			break;
+//		}
+//		case Find_korni:
+//		{
+//			Korni(k);
+//			system("pause");
+//			system("cls");
+//			break;
+//		}
+//		case Plus:
+//		{
+//			Arithmetic(k, l);
+//			system("cls");
+//			break;
+//		}
+//		case Minus:
+//		{
+//			Arithmetic(k, l, minus<>());
+//			system("cls");
+//			break;
+//		}
+//		case Exit:
+//		{
+//			return 0;
+//		}
+//		default:
+//		{
+//			cout << "Введите 1, 2, 3, 4, 5, 6 или 0" << endl;
+//			system("pause");
+//			system("cls");
+//			break;
+//		}
+//		}
+//	}
+//}
