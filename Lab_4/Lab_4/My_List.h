@@ -6,7 +6,7 @@ public:
 	Node *pNext;
 	Node *pPrev;
 	T data;
-	Node(T data = T(), Node *pNext = nullptr, Node *pPrev = nullptr)
+	Node(T data = T(), Node *pPrev = nullptr, Node *pNext = nullptr)
 	{
 		this->data = data;
 		this->pNext = pNext;
@@ -14,30 +14,41 @@ public:
 	}
 };
 
-//template<typename T>
-//class My_Iterator {
-//public:
-//	using different_type = std::ptrdiff_t;
-//	using value_type = T;
-//	using pointer = T;
-//	using reference = T&;
-//	using iterator_category = std::random_access_iterator_tag;
-//
-//	
-//private:
-//	Node<T>* iter;
-//};
+template<typename T>
+class Iterator {
+public:
+	using different_type = std::ptrdiff_t;
+	using value_type = T;
+	using pointer = T;
+	using reference = T&;
+	using iterator_category = std::random_access_iterator_tag;
+
+	Iterator(Node<T>* p = nullptr) {};
+	Iterator operator++();
+	Iterator operator--();
+	//Iterator operator++(int);
+	//Iterator operator--(int);
+	T* operator->() { return iter->data; };
+	T operator*();
+	operator Node<T>*() { return iter; }
+private:
+	Node<T>* iter;
+};
 
 
 template<typename T>
-class My_List
+class List
 {
 public:
-	My_List();
-	~My_List();
+	List();
+	~List();
 
 	int size() { return Size; }
 	
+	Iterator<T> begin();
+	Iterator<T> end();
+
+
 	void push_back  (T data);
 	void pop_back   ();
 	void push_front (T data);
@@ -45,7 +56,6 @@ public:
 	void insert     (T value, int index);
 	void clear      ();
 	void removeAt   (int index);
-
 
 
 private:
@@ -68,7 +78,7 @@ private:
 };
 
 template<typename T>
-My_List<T>::My_List()
+List<T>::List()
 {
 	Size = 0;
 	first = nullptr;
@@ -76,15 +86,25 @@ My_List<T>::My_List()
 }
 
 template<typename T>
-My_List<T>::~My_List()
+List<T>::~List()
 {
 	clear();
 }
 
-
+template<typename T>
+Iterator<T> List<T>::begin()
+{
+	return (Iterator<T>(this->first));
+}
 
 template<typename T>
-void My_List<T>::push_back(T data)
+Iterator<T> List<T>::end()
+{
+	return (Iterator<T>(this->last->pNext));
+}
+
+template<typename T>
+void List<T>::push_back(T data)
 {
 	Node<T> *new_node;
 	if (first == nullptr && last ==nullptr) {
@@ -106,35 +126,33 @@ void My_List<T>::push_back(T data)
 }
 
 template<typename T>
-inline void My_List<T>::push_front(T data)
+inline void List<T>::push_front(T data)
 {
-	first = new Node<T>(data, first);
-	//last = last->pNext;
+	first = new Node<T>(data, nullptr, first);
 	Size++;
 }
 
 template<typename T>
-inline void My_List<T>::pop_front()
+inline void List<T>::pop_front()
 {
 	Node<T> *temp = first;
 	first = first->pNext;
-	//last = last->pPrev;
 	delete temp;
 	Size--;
 }
 
 template<typename T>
-inline void My_List<T>::pop_back()
+inline void List<T>::pop_back()
 {
-	//Node<T> *temp = last;
-	//last = last->pPrev;
-	//delete temp;
-	//Size--;
-	removeAt(Size - 1);
+	Node<T> *temp = last;
+	last = last->pPrev;
+	delete temp;
+	Size--;
+	//removeAt(Size - 1);
 }
 
 template<typename T>
-inline void My_List<T>::insert(T data, int index)
+inline void List<T>::insert(T data, int index)
 {
 	if (index == 0) {
 		push_front(data);
@@ -154,7 +172,7 @@ inline void My_List<T>::insert(T data, int index)
 }
 
 template<typename T>
-inline void My_List<T>::clear()
+inline void List<T>::clear()
 {
 	while (Size != 0) {
 		pop_front();
@@ -162,7 +180,7 @@ inline void My_List<T>::clear()
 }
 
 template<typename T>
-inline void My_List<T>::removeAt(int index)
+inline void List<T>::removeAt(int index)
 {
 	if (index == 0) {
 		pop_front();
@@ -182,3 +200,23 @@ inline void My_List<T>::removeAt(int index)
 	}
 }
 
+
+template<typename T>
+Iterator<T> Iterator<T>::operator++()
+{
+	iter = iter->pNext;
+	return *this;
+}
+
+template<typename T>
+inline Iterator<T> Iterator<T>::operator--()
+{
+	iter = iter->pPrev;
+	return *this;
+}
+
+template<typename T>
+inline T Iterator<T>::operator*()
+{
+	return iter->data;
+}

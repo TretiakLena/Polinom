@@ -174,22 +174,21 @@ enum Menu
 
 
 int main() {
-	My_List<int> l;
-	l.push_back(2);
-	l.push_back(2);
-	l.clear();
-	l.push_front(90);
-	//l.push_back(3);
-	//l.pop_back();
-	l.push_front(12);
-	l.pop_front();
-	cout << l.size() << endl;
+	List<int> l;
+	l.push_back(5);
+	l.push_back(4);
+	l.push_back(7);
+	l.push_back(4);
+	l.push_back(12);
+	l.push_back(14);
 	//cout << l[1] << endl;
 	//list <int> ::iterator it;
-	/*for (auto &f : l)
+	Iterator<int> it;
+	for (it = l.begin(); it != l.end(); ++it)
 	{
-		cout << f << " ";
-	}*/
+		cout << *it << " ";
+	}
+	cout << endl;
 	system("pause");
 	return 0;
 }
