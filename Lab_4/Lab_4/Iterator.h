@@ -1,5 +1,4 @@
 #pragma once
-#include "My_List.h"
 #include "Node.h"
 
 template<typename T>

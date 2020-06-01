@@ -200,4 +200,3 @@ void List<T>::erase(Iterator<T> iter)
 	delete i;
 	Size;
 }
-
